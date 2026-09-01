@@ -2,11 +2,7 @@ import sys
 import timeit
 import matplotlib.pyplot as plt
 
-# на случай больших n для рекурсии
 sys.setrecursionlimit(10000)
-
-
-# ---------- 1. Две реализации ----------
 
 def fact_recursive(n):
     """Факториал через рекурсию."""
@@ -22,15 +18,10 @@ def fact_iterative(n):
         result *= i
     return result
 
-
-# ---------- 2. Один фиксированный список чисел для всех прогонов ----------
-
 ns = [10, 50, 100, 200, 300, 400, 500, 700, 900]   # ось X
 REPEAT = 5        # сколько раз повторяем замер, чтобы усреднить
 NUMBER = 1000     # сколько вызовов внутри одного замера
 
-
-# ---------- 3. Чистый бенчмарк ОДНОГО вызова ----------
 
 def bench(func, n):
     """
@@ -42,8 +33,6 @@ def bench(func, n):
     best = min(times)                 # самый чистый прогон
     return best / NUMBER * 1_000_000  # секунды -> микросекунды
 
-
-# ---------- 4. Замеры ----------
 
 rec_times = []
 it_times = []
@@ -61,8 +50,6 @@ for n in ns:
     print(f"{n:>5} | {t_rec:>14.2f} | {t_it:>10.2f} | {t_rec / t_it:>13.2f}x")
 
 
-# ---------- 5. График ----------
-
 plt.figure(figsize=(9, 5))
 plt.plot(ns, rec_times, 'o-', label='fact_recursive (рекурсия)')
 plt.plot(ns, it_times, 's-', label='fact_iterative (цикл)')
@@ -73,5 +60,5 @@ plt.title('Факториал: рекурсия vs цикл')
 plt.legend()
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
-plt.savefig('factorial_benchmark.png', dpi=120)  # чтобы было видно в Replit
+plt.savefig('factorial_benchmark.png', dpi=120)  
 plt.show()
