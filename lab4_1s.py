@@ -19,9 +19,8 @@ def fact_iterative(n):
     return result
 
 ns = [10, 50, 100, 200, 300, 400, 500, 700, 900]   # ось X
-REPEAT = 5        # сколько раз повторяем замер, чтобы усреднить
-NUMBER = 1000     # сколько вызовов внутри одного замера
-
+REPEAT = 5        
+NUMBER = 1000     
 
 def bench(func, n):
     """
@@ -30,8 +29,8 @@ def bench(func, n):
     берём минимум (самый "чистый" прогон без помех ОС) и делим на NUMBER.
     """
     times = timeit.repeat(lambda: func(n), repeat=REPEAT, number=NUMBER)
-    best = min(times)                 # самый чистый прогон
-    return best / NUMBER * 1_000_000  # секунды -> микросекунды
+    best = min(times)                 
+    return best / NUMBER * 1_000_000  
 
 
 rec_times = []
